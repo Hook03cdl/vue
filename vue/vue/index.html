@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background: #ccc;
+    }
+</style>
+<body>
+    
+    <div id="app">
+        
+        <input type="text" v-model="username">
+        <input type="text" v-model="lastname">
+        <button v-on:click="addPerson">guardar</button>
+    
+        <ul>
+            <li v-for="item in persons">
+                {{item.name}} - {{item.last}}
+            </li>
+        </ul>
+
+    </div>
+<script type="module">
+    const {createApp, ref} = Vue;
+
+    createApp({
+        setup(){
+            const username = ref("")
+            const lastname = ref("")
+            const persons=ref([]);
+            return{
+                username,
+                lastname,
+                persons
+            }
+        },
+        
+        methods:{
+            addPerson(){
+                const person = {
+                    name:this.username,
+                    last:this.lastname,
+                }
+                this.persons.push(person);
+            }
+        }
+    }).mount("#app")
+
+
+</script>
+</body>
+</html>
